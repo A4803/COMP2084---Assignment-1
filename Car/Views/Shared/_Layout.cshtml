@@ -9,6 +9,8 @@
 
 </head>
 <body>
+    
+    
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -22,9 +24,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Cars Details", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Cars", "index", "cars")</li>
+                    <li>@Html.ActionLink("Cars Details", "index", "car_details")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -34,7 +35,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Alay's Cars Detail</p>
+            <p>&copy; @DateTime.Now.Year - Alay Navagamiya - 200390250 - COMP2084 (ASP.net) </p>
         </footer>
     </div>
 
