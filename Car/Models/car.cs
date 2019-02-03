@@ -9,7 +9,6 @@ namespace Car.Models
     [Table("car")]
     public partial class car
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int id { get; set; }
 
         [Required]

@@ -8,9 +8,11 @@ namespace Car.Models
 
     public partial class car_details
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int car_id { get; set; }
 
         [Required]
