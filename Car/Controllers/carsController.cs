@@ -12,7 +12,7 @@ namespace Car.Controllers
 {
     public class carsController : Controller
     {
-        private dbmodel db = new dbmodel();
+        private CarModels db = new CarModels();
 
         // GET: cars
         public ActionResult Index()

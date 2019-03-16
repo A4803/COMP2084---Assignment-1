@@ -12,12 +12,13 @@ namespace Car.Controllers
 {
     public class car_detailsController : Controller
     {
-        private dbmodel db = new dbmodel();
+        private CarModels db = new CarModels();
 
         // GET: car_details
         public ActionResult Index()
         {
-            return View(db.car_details.ToList());
+            var car_details = db.car_details.Include(c => c.car);
+            return View(car_details.ToList());
         }
 
         // GET: car_details/Details/5
@@ -38,6 +39,7 @@ namespace Car.Controllers
         // GET: car_details/Create
         public ActionResult Create()
         {
+            ViewBag.id = new SelectList(db.cars, "id", "Type");
             return View();
         }
 
@@ -46,7 +48,7 @@ namespace Car.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,car_id,name,color,seats")] car_details car_details)
+        public ActionResult Create([Bind(Include = "car_id,id,name,color,seats")] car_details car_details)
         {
             if (ModelState.IsValid)
             {
@@ -55,6 +57,7 @@ namespace Car.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.id = new SelectList(db.cars, "id", "Type", car_details.id);
             return View(car_details);
         }
 
@@ -70,6 +73,7 @@ namespace Car.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.id = new SelectList(db.cars, "id", "Type", car_details.id);
             return View(car_details);
         }
 
@@ -78,7 +82,7 @@ namespace Car.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,car_id,name,color,seats")] car_details car_details)
+        public ActionResult Edit([Bind(Include = "car_id,id,name,color,seats")] car_details car_details)
         {
             if (ModelState.IsValid)
             {
@@ -86,6 +90,7 @@ namespace Car.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.id = new SelectList(db.cars, "id", "Type", car_details.id);
             return View(car_details);
         }
 

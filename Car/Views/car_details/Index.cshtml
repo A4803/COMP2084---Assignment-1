@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Car.Models.car_details>
 
 @{
-    ViewBag.Title = "car_details";
+    ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,10 +10,10 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table table-striped table-hover">
+<table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.car_id)
+            @Html.DisplayNameFor(model => model.car.Type)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.name)
@@ -30,7 +30,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.car_id)
+            @Html.DisplayFor(modelItem => item.car.Type)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.name)
@@ -42,9 +42,9 @@
             @Html.DisplayFor(modelItem => item.seats)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            @Html.ActionLink("Edit", "Edit", new { id=item.car_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.car_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.car_id })
         </td>
     </tr>
 }

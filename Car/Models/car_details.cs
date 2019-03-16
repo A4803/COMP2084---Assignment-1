@@ -8,11 +8,9 @@ namespace Car.Models
 
     public partial class car_details
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int car_id { get; set; }
 
         [Required]
@@ -26,5 +24,7 @@ namespace Car.Models
         [Required]
         [StringLength(50)]
         public string seats { get; set; }
+
+        public virtual car car { get; set; }
     }
 }

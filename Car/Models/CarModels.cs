@@ -5,9 +5,9 @@ namespace Car.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class dbmodel : DbContext
+    public partial class CarModels : DbContext
     {
-        public dbmodel()
+        public CarModels()
             : base("name=DefaultConnection")
         {
         }
@@ -24,6 +24,11 @@ namespace Car.Models
             modelBuilder.Entity<car>()
                 .Property(e => e.Model)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<car>()
+                .HasMany(e => e.car_details)
+                .WithRequired(e => e.car)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<car_details>()
                 .Property(e => e.name)
