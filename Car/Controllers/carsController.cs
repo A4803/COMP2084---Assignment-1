@@ -12,12 +12,23 @@ namespace Car.Controllers
 {
     public class carsController : Controller
     {
-        private CarModels db = new CarModels();
+        //private CarModels db = new CarModels();
+
+        IMockCars db;
+        public carsController()
+        {
+            this.db = new IDataCars();
+        }
+
+        public carsController(IMockCars mockdb)
+        {
+            this.db = mockdb;
+        }
 
         // GET: cars
         public ActionResult Index()
         {
-            return View(db.cars.ToList());
+            return View("Index",db.cars.ToList());
         }
 
         // GET: cars/Details/5
@@ -27,18 +38,19 @@ namespace Car.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            car car = db.cars.Find(id);
+            //car car = db.cars.Find(id);
+            car car = db.cars.SingleOrDefault(c => c.id == id);
             if (car == null)
             {
                 return HttpNotFound();
             }
-            return View(car);
+            return View("Details",car);
         }
 
         // GET: cars/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         // POST: cars/Create
@@ -50,8 +62,9 @@ namespace Car.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.cars.Add(car);
-                db.SaveChanges();
+                //db.cars.Add(car);
+                //db.SaveChanges();
+                db.Save(car);
                 return RedirectToAction("Index");
             }
 
@@ -65,12 +78,13 @@ namespace Car.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            car car = db.cars.Find(id);
+            //car car = db.cars.Find(id);
+            car car = db.cars.SingleOrDefault(c => c.id == id);
             if (car == null)
             {
                 return HttpNotFound();
             }
-            return View(car);
+            return View("Edit",car);
         }
 
         // POST: cars/Edit/5
@@ -82,11 +96,12 @@ namespace Car.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(car).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(car).State = EntityState.Modified;
+                //db.SaveChanges();
+                db.Save(car);
                 return RedirectToAction("Index");
             }
-            return View(car);
+            return View("Edit",car);
         }
 
         // GET: cars/Delete/5
@@ -96,22 +111,25 @@ namespace Car.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            car car = db.cars.Find(id);
+            //car car = db.cars.Find(id);
+            car car = db.cars.SingleOrDefault(c => c.id == id);
             if (car == null)
             {
                 return HttpNotFound();
             }
-            return View(car);
-        }
+            return View("Delete",car);
+        }       
 
         // POST: cars/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            car car = db.cars.Find(id);
-            db.cars.Remove(car);
-            db.SaveChanges();
+            //car car = db.cars.Find(id);
+            car car = db.cars.SingleOrDefault(c => c.id == id);
+            //db.cars.Remove(car);
+            //db.SaveChanges();
+            db.Delete(car);
             return RedirectToAction("Index");
         }
 

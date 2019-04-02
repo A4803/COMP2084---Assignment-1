@@ -187,7 +187,9 @@
     <Compile Include="Models\car.cs" />
     <Compile Include="Models\CarModels.cs" />
     <Compile Include="Models\car_details.cs" />
+    <Compile Include="Models\IDataCars.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IMockCars.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
